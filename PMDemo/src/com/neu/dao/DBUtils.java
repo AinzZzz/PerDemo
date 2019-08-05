@@ -23,7 +23,7 @@ public class DBUtils {
 		//创建一个上下文对象
 		Context context = new InitialContext();
 		//在Context中，查找外部资源
-		DataSource ds = (DataSource)context.lookup("java:comp/evn/jdbc/mydatasource");
+		DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/mydatasource");
 		
 		Connection connection = ds.getConnection();
 		return connection;
