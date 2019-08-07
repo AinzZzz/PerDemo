@@ -11,15 +11,15 @@ public class EmpDaoImpl implements EmpDao {
 	  DBUtils util = new DBUtils();
 	@Override
 	public int insert(Emp emp) throws Exception {
-		String sql ="insert into emp(empno,ename,gender,dname,job,emply,status) values(?,?,?,?,?,?,?)";
-		int n = util.executeUpdate(sql, emp.getEmpno(),emp.getEname(),emp.getGender(),emp.getDname(),emp.getJob(),emp.getEmply(),emp.getStatus());
+		String sql ="insert into emp(empno,ename,gender,dname,job,emply,status,tel,email) values(?,?,?,?,?,?,?,?,?)";
+		int n = util.executeUpdate(sql, emp.getEmpno(),emp.getEname(),emp.getGender(),emp.getDname(),emp.getJob(),emp.getEmply(),emp.getStatus(),emp.getTel(),emp.getEmail());
 				
 		return n;
 	}
 
 	@Override
 	public int update(Emp emp) throws Exception {
-		String sql ="update emp set dname=?,job=?,emply=?,status=? where  ename = ?";
+		String sql ="update emp set dname=?,job=?,emply=?,status=?,tel=?,email=? where  ename = ?";
 		int n = util.executeUpdate(sql, emp.getDname(),emp.getJob(),emp.getEmply(),emp.getStatus(),emp.getEname());
 				
 		return n;
@@ -47,6 +47,8 @@ public class EmpDaoImpl implements EmpDao {
 		String job;
 		String emply;
 		String status;
+		Integer tel;
+		String email;
 		while(rs.next()) {
 			empno = rs.getInt("empno");
 			ename = rs.getString("ename");
@@ -55,8 +57,10 @@ public class EmpDaoImpl implements EmpDao {
 			job = rs.getString("job");
 			emply = rs.getString("emply");
 			status = rs.getString("status");
+			tel = rs.getInt("tel");
+			email = rs.getString("email");
 			
-			emp = new Emp(empno,ename,gender,dname,job,emply,status);
+			emp = new Emp(empno,ename,gender,dname,job,emply,status,tel,email);
 		
 		}
 		util.closeConnection(connection);		
@@ -78,6 +82,9 @@ public class EmpDaoImpl implements EmpDao {
 		String dname;		
 		String emply;
 		String status;
+		Integer tel;
+		String email;
+		
 		while(rs.next()) {
 			empno = rs.getInt("empno");
 			ename = rs.getString("ename");
@@ -86,8 +93,10 @@ public class EmpDaoImpl implements EmpDao {
 			job = rs.getString("job");
 			emply = rs.getString("emply");
 			status = rs.getString("status");
+			tel = rs.getInt("tel");
+			email = rs.getString("email");
 			
-			emp = new Emp(empno,ename,gender,dname,job,emply,status);
+			emp = new Emp(empno,ename,gender,dname,job,emply,status,tel,email);
 		
 		}
 		util.closeConnection(connection);		
@@ -106,6 +115,8 @@ public class EmpDaoImpl implements EmpDao {
 		String dname;		
 		String emply;
 		String status;
+		Integer tel;
+		String email;
 		while(rs.next()) {
 			empno = rs.getInt("empno");
 			ename = rs.getString("ename");
@@ -114,8 +125,10 @@ public class EmpDaoImpl implements EmpDao {
 			job = rs.getString("job");
 			emply = rs.getString("emply");
 			status = rs.getString("status");
+			tel = rs.getInt("tel");
+			email = rs.getString("email");
 			
-			emp = new Emp(empno,ename,gender,dname,job,emply,status);
+			emp = new Emp(empno,ename,gender,dname,job,emply,status,tel,email);
 		
 		}
 		util.closeConnection(connection);		
@@ -135,6 +148,8 @@ public class EmpDaoImpl implements EmpDao {
 		String job;	
 		String emply;
 		String status;
+		Integer tel;
+		String email;
 		while(rs.next()) {
 			empno = rs.getInt("empno");
 			ename = rs.getString("ename");
@@ -143,8 +158,11 @@ public class EmpDaoImpl implements EmpDao {
 			job = rs.getString("job");
 			emply = rs.getString("emply");
 			status = rs.getString("status");
+			tel = rs.getInt("tel");
+			email = rs.getString("email");
 			
-			emp = new Emp(empno,ename,gender,dname,job,emply,status);
+			
+			emp = new Emp(empno,ename,gender,dname,job,emply,status,tel,email);
 		
 		}
 		util.closeConnection(connection);		
@@ -165,6 +183,9 @@ public class EmpDaoImpl implements EmpDao {
 		String job;
 		String emply;
 		String status;
+		Integer tel;
+		String email;
+		
 		while(rs.next()) {
 			empno = rs.getInt("empno");
 			ename = rs.getString("ename");
@@ -173,8 +194,10 @@ public class EmpDaoImpl implements EmpDao {
 			job = rs.getString("job");
 			emply = rs.getString("emply");
 			status = rs.getString("status");
+			tel = rs.getInt("tel");
+			email = rs.getString("email");
 			
-			emp = new Emp(empno,ename,gender,dname,job,emply,status);
+			emp = new Emp(empno,ename,gender,dname,job,emply,status,tel,email);
 		  list.add(emp);
 		}
 		util.closeConnection(connection);		

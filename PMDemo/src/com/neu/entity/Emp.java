@@ -8,11 +8,14 @@ public class Emp {
 	private String job;
 	private String emply;
 	private String status;
+	private Integer tel;
+	private String email;
 	public Emp() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Emp(Integer empno, String ename, String gender, String dname, String job, String emply, String status) {
+	public Emp(Integer empno, String ename, String gender, String dname, String job, String emply, String status,
+			Integer tel, String email) {
 		super();
 		this.empno = empno;
 		this.ename = ename;
@@ -21,6 +24,13 @@ public class Emp {
 		this.job = job;
 		this.emply = emply;
 		this.status = status;
+		this.tel = tel;
+		this.email = email;
+	}
+	@Override
+	public String toString() {
+		return "Emp [empno=" + empno + ", ename=" + ename + ", gender=" + gender + ", dname=" + dname + ", job=" + job
+				+ ", emply=" + emply + ", status=" + status + ", tel=" + tel + ", email=" + email + "]";
 	}
 	public Integer getEmpno() {
 		return empno;
@@ -64,11 +74,33 @@ public class Emp {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	@Override
-	public String toString() {
-		return "Emp [empno=" + empno + ", ename=" + ename + ", gender=" + gender + ", dname=" + dname + ", job=" + job
-				+ ", emply=" + emply + ", status=" + status + "]";
+	public Integer getTel() {
+		return tel;
 	}
+	public void setTel(Integer tel) {
+		this.tel = tel;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Emp(Integer empno, String gender, String dname, String job, String emply, String status,
+			Integer tel, String email, String ename) {
+		super();
+		this.empno = empno;
+		this.ename = ename;
+		this.gender = gender;
+		this.dname = dname;
+		this.job = job;
+		this.emply = emply;
+		this.status = status;
+		this.tel = tel;
+		this.email = email;
+	}
+	
+	
 	
 	
 }	

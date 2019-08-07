@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -20,8 +19,46 @@
         <script src="js/jquery.uniform.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
         <script src="js/jquery.validate.js"></script>
-        <script src="js/unicorn.js"></script>
-        <script src="js/addemp.js"></script>	            
+        <script src="js/unicorn.js"></script> 
+        <script type="text/javascript">
+        	$(document).ready(function (){
+        		$("form input").blur(function (){
+        			validateInput(this);
+        		});
+        		$("form").submit(function (){
+        			var f = false;
+
+        			var a = $("form input"); 
+        			
+        			for(var i = 0; i < a.size(); i++){
+        				var t = validateInput(a.get(i));
+        				f = f && t;
+        			}
+        			return f;
+        		});
+        		$("#userid").bind("input", function (){
+        			var userid = $(this).val();
+        			if(userid == 1045){
+        				$("#span1").html("李建国");
+        			}else{
+        				$("#span1").html("员工姓名");
+        			}
+        		})
+        	});
+
+        	function validateInput(obj){
+        		var v = $(obj).val();
+    			if(v == ""){
+    				$(obj).parent().parent().removeClass("success");
+					$(obj).parent().parent().addClass("error");
+					return false;
+    			}else{
+    				$(obj).parent().parent().removeClass("error");
+					$(obj).parent().parent().addClass("success");
+					return true;
+    			}
+        	}
+        </script>          
 	</head>	
 	<body>
 		<div id="header"><h1></h1></div>
@@ -59,19 +96,36 @@
                     </a>
                 </li>
                 <li>
-                    <a href="changepassword.jsp">
+                    <a href="changePassword.jsp">
                         <i class="icon icon-ok-circle"></i> 
                         <span>修改登录密码</span>
                     </a>
                 </li>
-               
-                <li class="active">
+                <li class="submenu">
+                    <a href="#">
+                        <i class="icon icon-time"></i> 
+                        <span>休假管理</span> 
+                        <!--
+                        <span class="label">2</span>
+                        -->
+                    </a>
+                    <ul>
+                        <li><a href="#">申请休假</a></li>
+                        <li><a href="#">审批休假</a></li>
+                        <li><a href="#">查看休假记录</a></li>
+                        <li><a href="#">查看审批记录</a></li>
+                        <li><a href="#">休假记录统计</a></li>
+                        <li><a href="#">休假报表</a></li>
+                        <li><a href="vtypelist.html">假期类型管理</a></li>
+                    </ul>
+                </li>
+                <li>
                     <a href="emplist.jsp">
                         <i class="icon icon-user"></i> 
                         <span>员工信息管理</span> 
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="deptlist.jsp">
                         <i class="icon icon-flag"></i> 
                         <span>部门信息管理</span> 
@@ -87,15 +141,15 @@
         </div>
 		<div id="content">
 			<div id="content-header">
-				<h1>新增员工</h1>
+				<h1>新增部门</h1>
 			</div>
 			<div id="breadcrumb">
-				<a href="main.jsp" class="tip-bottom">
+				<a href="main.html" class="tip-bottom">
                 	<i class="icon-home"></i>
                                                     首页
                 </a>
-				<a href="emplist.jsp">员工列表</a>
-				<a href="#" class="current">新增员工</a>
+				<a href="deptlist.jsp">部门列表</a>
+				<a href="#" class="current">新增部门</a>
 			</div>
 			<div class="container-fluid">
 				<div class="row-fluid">
@@ -105,87 +159,44 @@
 									<span class="icon">
 										<i class="icon-align-justify"></i>									
 									</span>
-									<h5>员工信息</h5>
+									<h5>部门信息</h5>
 								</div>
 								<div class="widget-content nopadding">
-									
-									<form id="eform" action="${pageContext.request.contextPath }/AddEmpServlet" class="form-horizontal" method="post" />
-	                                     <div id="info1" class="control-group">
-	                                        <label class="control-label">
-	                                        	<span style="color: red">*</span>
-	                                        	员工编号:
-	                                        </label>
-	                                        <div class="controls">
-	                                            <input type="text" name="empno" id="empno" />
-	                                        </div>
-	                                    </div>
+									<form id="eform" action="${pageContext.request.contextPath }/AddDeptServlet" class="form-horizontal" method="post" />
 	                                    <div id="info1" class="control-group">
 	                                        <label class="control-label">
 	                                        	<span style="color: red">*</span>
-	                                        	员工姓名:
+	                                        	部门编号:
 	                                        </label>
 	                                        <div class="controls">
-	                                            <input type="text" name="ename" id="ename" />
+	                                            <input type="text" name="deptno" id="deptno"/>
 	                                        </div>
 	                                    </div>
-	                                 	 <div id="info1" class="control-group">
+	                                    <div id="info2" class="control-group">
 	                                        <label class="control-label">
 	                                        	<span style="color: red">*</span>
-	                                        	员工性别:
+	                                        	部门名称:
 	                                        </label>
 	                                        <div class="controls">
-	                                           <select name="gender">
-	                                           <option value="0">请选择</option>
-	                                           <option value="1">男</option>
-	                                           <option value="2">女</option>
-	                                           </select>	                                            
-	                                        </div>	                                        
-	                                    </div>
-	                                    <div id="info1" class="control-group">
-	                                        <label class="control-label">
-	                                        	<span style="color: red">*</span>
-	                                        	员工部门:
-	                                        </label>
-	                                        <div class="controls">
-	                                            <input type="text" name="dname" id="dname" />
+	                                            <input type="number" name="dname" id="dname"  />
+	                                            <span id="span1"></span>
 	                                        </div>
 	                                    </div>
-	                                     <div id="info1" class="control-group">
+	                                    <div id="info3" class="control-group">
 	                                        <label class="control-label">
 	                                        	<span style="color: red">*</span>
-	                                        	员工岗位:
+	                                        	部门类型:
 	                                        </label>
+	                                        	
 	                                        <div class="controls">
-	                                            <input type="text" name="job" id="job" />
+	                                           <select name="type">
+	                                           	<option value="0">请选择</option>
+	                                           	<option value="1">公司</option>
+	                                           	<option value="2">部门</option>
+	                                           </select>
 	                                        </div>
 	                                    </div>
-	                                     <div id="info1" class="control-group">
-	                                        <label class="control-label">
-	                                        	<span style="color: red">*</span>
-	                                        	用工形式:
-	                                        </label>
-	                                        <div class="controls">
-	                                           <select name="emply">
-	                                           <option value="0">请选择</option>
-	                                           <option value="1">正式员工</option>
-	                                           <option value="2">临时员工</option>
-	                                           </select>	                                            
-	                                        </div>	                                        
-	                                    </div>
-	                                     <div id="info1" class="control-group">
-	                                        <label class="control-label">
-	                                        	<span style="color: red">*</span>
-	                                        	状态:
-	                                        </label>
-	                                        <div class="controls">
-	                                           <select name="status">
-	                                           <option value="0">请选择</option>
-	                                           <option value="1">在职</option>
-	                                           <option value="2">离职</option>
-	                                           </select>	                                            
-	                                        </div>	                                        
-	                                    </div>
-	                                     <div id="info1" class="control-group">
+	                                    <div id="info3" class="control-group">
 	                                        <label class="control-label">
 	                                        	<span style="color: red">*</span>
 	                                        	电话:
@@ -194,7 +205,7 @@
 	                                            <input type="number" name="tel" id="tel" />
 	                                        </div>
 	                                    </div>
-	                                     <div id="info1" class="control-group">
+	                                     <div id="info3" class="control-group">
 	                                        <label class="control-label">
 	                                        	<span style="color: red">*</span>
 	                                        	email:
@@ -213,24 +224,16 @@
 						</div>
 				</div>	
 			</div>	
-			
-			 <c:choose>
-			<c:when test="${ n==1 }">
-				 <div class="alert alert-success">
-                	保存成功
-            	</div>
-			</c:when>
-			
-			<c:when test="${ n==0 }">
-				   <div class="alert alert-error">
-		            	    保存失败
-		           </div>
-			</c:when>
-		</c:choose> 
-	  
-     
 
-    	
+            <div class="alert alert-error">
+                保存失败
+            </div>
+
+            <div class="alert alert-success">
+                保存成功
+            </div>
+
+			
 		</div>		
         <div class="row-fluid">&nbsp;</div>
         <div class="row-fluid">

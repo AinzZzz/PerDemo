@@ -6,6 +6,18 @@ public class Dept {
 	private String type;
 	private Integer tel;
 	private String email;
+	public Dept() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Dept(Integer deptno, String dname, String type, Integer tel, String email) {
+		super();
+		this.deptno = deptno;
+		this.dname = dname;
+		this.type = type;
+		this.tel = tel;
+		this.email = email;
+	}
 	public Integer getDeptno() {
 		return deptno;
 	}
@@ -36,29 +48,12 @@ public class Dept {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Dept(Integer deptno, String dname, String type, Integer tel, String email) {
-		super();
-		this.deptno = deptno;
-		this.dname = dname;
-		this.type = type;
-		this.tel = tel;
-		this.email = email;
-	}
-	public Dept(Integer deptno, String dname, Integer tel, String email) {
-		super();
-		this.deptno = deptno;
-		this.dname = dname;
-		this.tel = tel;
-		this.email = email;
-	}
-	public Dept() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	@Override
 	public String toString() {
 		return "Dept [deptno=" + deptno + ", dname=" + dname + ", type=" + type + ", tel=" + tel + ", email=" + email
 				+ "]";
 	}
-
+	
+	
+		
 }

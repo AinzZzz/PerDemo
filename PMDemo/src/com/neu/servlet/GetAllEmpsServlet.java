@@ -1,27 +1,30 @@
 package com.neu.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.neu.dao.DeptDao;
-import com.neu.dao.DeptDaoImpl;
-import com.neu.entity.Dept;
+import com.neu.dao.EmpDao;
+import com.neu.dao.EmpDaoImpl;
+import com.neu.entity.Emp;
 
 /**
- * Servlet implementation class AddDeptServlet
+ * Servlet implementation class GetAllServlet
  */
-@WebServlet("/AddDeptServlet")
-public class AddDeptServlet extends HttpServlet {
+@WebServlet("/GetAllEmpsServlet")
+public class GetAllEmpsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddDeptServlet() {
+    public GetAllEmpsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,33 +33,20 @@ public class AddDeptServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int deptno = Integer.parseInt(request.getParameter("deptno"));
-		String dname = request.getParameter("dname");
-		String type = request.getParameter("type");
-		int tel = Integer.parseInt(request.getParameter("tel"));
-		String email = request.getParameter("email");
+		EmpDao empDao = new EmpDaoImpl();
 		
-		DeptDao dao=new DeptDaoImpl();
-		Dept dept =new Dept(deptno, dname, type, tel, email);
+		
 		try {
+			List<Emp> emps = empDao.getAll();
+			request.setAttribute("emps", emps);
 			
-			int n = 0;
-			if(!(dname == null || "".equals(dname) ||email == null || "".equals(email)|| 
-					  type == null || "".equals(type) )
-	) {
-				n = dao.insert(dept);
-				
-			}
-			request.setAttribute("n",n);
-			request.getRequestDispatcher("/addDept.jsp").forward(request, response);
+			request.getRequestDispatcher("/viewempinfo.jsp").forward(request, response);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-						
-		
-		}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

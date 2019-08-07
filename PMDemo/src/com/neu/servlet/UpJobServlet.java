@@ -7,21 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.neu.dao.DeptDao;
-import com.neu.dao.DeptDaoImpl;
-import com.neu.entity.Dept;
+import com.neu.dao.JobInfoDao;
+import com.neu.dao.JobInfoDaoImpl;
+import com.neu.entity.JobInfo;
 
 /**
- * Servlet implementation class AddDeptServlet
+ * Servlet implementation class UpJobServlet
  */
-@WebServlet("/AddDeptServlet")
-public class AddDeptServlet extends HttpServlet {
+@WebServlet("/UpJobServlet")
+public class UpJobServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddDeptServlet() {
+    public UpJobServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,33 +30,34 @@ public class AddDeptServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int deptno = Integer.parseInt(request.getParameter("deptno"));
-		String dname = request.getParameter("dname");
-		String type = request.getParameter("type");
-		int tel = Integer.parseInt(request.getParameter("tel"));
-		String email = request.getParameter("email");
+		request.setCharacterEncoding("utf-8");
 		
-		DeptDao dao=new DeptDaoImpl();
-		Dept dept =new Dept(deptno, dname, type, tel, email);
+		Integer jobno = Integer.parseInt(request.getParameter("jobno"));
+		String job = request.getParameter("job");
+		String jtype = request.getParameter("jtype");
+		String weave = request.getParameter("weave");
+		
+		
+		
 		try {
+
+			JobInfoDao jobinfoDao = new JobInfoDaoImpl();
 			
-			int n = 0;
-			if(!(dname == null || "".equals(dname) ||email == null || "".equals(email)|| 
-					  type == null || "".equals(type) )
-	) {
-				n = dao.insert(dept);
+			JobInfo jobinfo = new JobInfo(jobno,job,jtype,weave);			
+						
+			int n = jobinfoDao.update(jobinfo);
+			if(n==1) {
+				response.sendRedirect(request.getContextPath()+"/modifyJob.jsp");
 				
 			}
-			request.setAttribute("n",n);
-			request.getRequestDispatcher("/addDept.jsp").forward(request, response);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-						
 		
-		}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

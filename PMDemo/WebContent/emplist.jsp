@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -101,13 +102,16 @@
                 </a>
 				<a href="#" class="current">员工信息管理</a>
 			</div>
-			<form action="#" method="post" name="searchForm">
+			<form action="${pageContext.request.contextPath }/GetAllEmpsServlet" method="post" name="searchForm">
 			<input type="hidden" name="pagenum" id="pagenum"/>
 			<div class="container-fluid">
 				<div class="row-fluid">
 					<div class="control-group">
+					<span class="span3">
+							员工编号：<input id="empno" name="empno" type="text" style="width:65%"/>
+						</span>
 						<span class="span3">
-							姓名：<input id="ename" name="ename" type="text" style="width:65%"/>
+							员工姓名：<input id="ename" name="ename" type="text" style="width:65%"/>
 						</span>
 						<span class="span3">
 							性别：<select id="gender" name="gender" style="width:70%">
@@ -117,19 +121,16 @@
 								</select>
 						</span>
 						<span class="span3">
-							职位：<select id="job" name="job" style="width:70%">
+							用工形式：<select id="emply" name="emply" style="width:70%">
 									<option value="-1">=请选择=</option>
-									<option value="1">软件工程师</option>
-                                    <option value="2">高级软件工程师</option>
+									<option value="1">正式员工</option>
+                                    <option value="2">临时员工</option>
 								</select>
 						</span>
 						<span class="span3">
-							部门：<select id="dname" name="dname" style="width:70%">
-									<option value="-1">=请选择=</option>
-									<option value="1">研发一部</option>
-                                    <option value="2">研发二部</option>
-								</select>
+							部门名称：<input id="job" name="job" type="text" style="width:65%"/>
 						</span>
+						
 					</div>
 					<div class="control-group">
 
@@ -177,19 +178,19 @@
 										<th>编号</th>
 										<th>姓名</th>
 										<th>性别</th>
-										<th>职位</th>
-										<th>部门</th>
+										<th>用工形式</th>
+										<th>部门名称</th>
 										<th>状态</th>
-										<th>操作</th>
+										
 									</tr>
 								</thead>
 								<tbody>
                                     <tr>
                                         <td>1001</td>
-                                        <td>张三</td>
+                                        <td>史蒂夫·罗杰斯</td>
                                         <td>男</td>
-                                        <td>高级软件工程师</td>
-                                        <td>研发一部</td>
+                                        <td>正式员工</td>
+                                        <td>神盾局</td>
                                         <td>在职</td>
                                         <td>
                                             <button class="btn btn-info" onclick="allmessage()">
@@ -203,7 +204,7 @@
                                             
                                             <script type="text/javascript">
 											  function allmessage(){
-                                                   location.href="viewempinfo.jsp";
+                                                   location.href="${pageContext.request.contextPath }/GetAllEmpsServlet";
                                                }
                                               function gotomodify(){
                                                   location.href="modifyEmp.jsp";

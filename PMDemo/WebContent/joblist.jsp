@@ -101,7 +101,7 @@
                 </a>
 				<a href="#" class="current">职位信息管理</a>
 			</div>
-			<form action="${pageContext.request.contextPath }/AddJobServlet" method="post" name="searchForm">
+			<form action="${pageContext.request.contextPath }/GetAllJobServlet" method="post" name="searchForm">
 			<input type="hidden" name="pagenum" id="pagenum"/>
 			<div class="container-fluid">
 				<div class="row-fluid">
@@ -174,7 +174,7 @@
                                             
                                             <script type="text/javascript">
 											  function allmessage(){
-                                                   location.href="viewjobinfo.jsp";
+                                                   location.href="${pageContext.request.contextPath }/GetAllJobServlet";
                                                }
                                               function gotomodify(){
                                                   location.href="modifyJob.jsp";

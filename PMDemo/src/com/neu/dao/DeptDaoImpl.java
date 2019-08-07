@@ -20,6 +20,7 @@ public class DeptDaoImpl implements DeptDao {
 		Dept dept = null;
 		Integer deptno;
 		String dname;
+		String type;
 		Integer tel;
 		String email;
 		while (rs.next()) {
@@ -27,8 +28,9 @@ public class DeptDaoImpl implements DeptDao {
 			dname = rs.getString("dname");
 			tel = rs.getInt("tel");
 			email = rs.getString("email");
+			type = rs.getNString("type");
 
-			dept = new Dept(deptno, dname, tel, email);
+			dept = new Dept(deptno,dname,type,tel,email);
 
 			list.add(dept);
 		}

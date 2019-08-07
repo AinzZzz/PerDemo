@@ -139,7 +139,7 @@
 					</button>
 					<script type="text/javascript">
 						function addDept(){
-							location.href="adddept.jsp";
+							location.href="addDept.jsp";
 						}
 					</script>
 				</div>
