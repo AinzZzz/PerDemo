@@ -10,7 +10,7 @@ public interface JobInfoDao {
 
 	int delete(int jobno) throws Exception;
 
-	JobInfo getByName(String job) throws Exception;
+	JobInfo getById(Integer jobno) throws Exception;
 
 	JobInfo getByType(String jtype) throws Exception;
 

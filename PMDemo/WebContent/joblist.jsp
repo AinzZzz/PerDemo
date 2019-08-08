@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -149,83 +151,73 @@
 							<table class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>编号</th>
-										<th>职位名称</th>
-										<th>职位级别</th>
-										<th>状态</th>
+										<th>岗位编号</th>
+										<th>岗位名称</th>
+										<th>岗位类型</th>
+										<th>编制</th>
 										<th>操作</th>
 									</tr>
 								</thead>
 								<tbody>
-                                    <tr>
-                                        <td>6001</td>
-                                        <td>高级软件工程师</td>
-                                        <td>12</td>
-                                        <td>活动</td>
-                                        <td>
-                                            <button class="btn btn-info" onclick="allmessage()">
+										<c:forEach items="${jobinfos }" var="jobinfo" >
+	                             		<tr>
+	                             		<td>${jobinfo.jobno }</td>	                             		
+	                             		<td>${jobinfo.job }</td>	                             		
+	                             		<td>${jobinfo.jtype }</td>	                             		
+	                             		<td>${jobinfo.weave }</td>                             		
+	                             		
+	                             		
+	                             		 <td>
+                                            <button class="btn btn-info" onclick="allmessage${status.index}()">
                                                 <i class="icon-white icon-eye-open"></i>
                                                 查看
                                             </button>
-                                            <button class="btn btn-warning" onclick="gotomodify()">
+                                            <button class="btn btn-warning" onclick="gotomodify${status.index}()">
                                                 <i class="icon-white icon-refresh"></i>
                                                 修改
                                             </button>
                                             
-                                            <script type="text/javascript">
-											  function allmessage(){
-                                                   location.href="${pageContext.request.contextPath }/GetAllJobServlet";
-                                               }
-                                              function gotomodify(){
-                                                  location.href="modifyJob.jsp";
-                                              }
-
-                                            </script>
-                                            <button class="btn btn-danger">
+                                           
+                                            <button class="btn btn-danger" onclick="Del()">
                                                 <i class="icon-white icon-minus"></i>
-                                                撤销
+                                                删除
                                             </button>
+                                            <button class="btn btn-success" onclick="gotoChange()">
+                                                <i class="icon-white icon-share"></i>
+                                                调转
+                                            </button>
+                                            
+                                            
+                                            
+                                             <script type="text/javascript">
+											  function allmessage${status.index}(){
+                                                   location.href="${pageContext.request.contextPath }/GetJobInfoByIdServlet?jobno=${jobinfo.jobno }";
+                                               }
+                                              function gotomodify${status.index}(){
+                                                  location.href="modifyEmp.jsp";
+                                              }
+											  function gotoChange(){
+                                                  location.href = "changeEmp.jsp";
+                                                  
+                                              }
+											  function Del(){
+                                                  location.href = "${pageContext.request.contextPath }/DelJobServlet?jobno=${jobinfo.jobno }";
+                                                  
+                                              }
+											  
+                                            </script>
+                                           
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6002</td>
-                                        <td>软件工程师</td>
-                                        <td>9</td>
-                                        <td>撤销</td>
-                                        <td>
-                                            <button class="btn btn-info" onclick="allmessage()">
-                                                <i class="icon-white icon-eye-open"></i>
-                                                查看
-                                            </button>
-                                            <button class="btn btn-warning" onclick="gotomodify()">
-                                                <i class="icon-white icon-refresh"></i>
-                                                修改
-                                            </button>
-                                            <button class="btn btn-info">
-                                                <i class="icon-white icon-plus"></i>
-                                                恢复
-                                            </button>
-                                        </td>
-                                    </tr>
-								</tbody>
+	                             		</tr>
+	                             </c:forEach> 
+	                             
+									</tbody>
 							</table>							
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
-				<div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers">
-			<a tabindex="0" href="javascript:"+method+"(1)" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
-			<a tabindex="0" href="#" class="previous fg-button ui-button ui-state-default">上一页</a>
-            <a tabindex="0" href="#" class="fg-button ui-button ui-state-default">1</a>
-            <a tabindex="0" class="fg-button ui-button ui-state-default ui-state-disabled">2
-            </a>
-            <a tabindex="0" href="#" class="fg-button ui-button ui-state-default">3</a>
-            <a tabindex="0" href="#" class="previous fg-button ui-button ui-state-default">下一页</a>
-			<a tabindex="0" href="#" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default">尾页</a>
 			
-			</div>
-			</div>
 		</div>		
         <div class="row-fluid">&nbsp;</div>
         <div class="row-fluid">

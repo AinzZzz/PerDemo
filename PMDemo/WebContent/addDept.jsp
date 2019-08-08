@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    <%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>企业人事管理平台</title>
@@ -178,8 +179,8 @@
 	                                        	部门名称:
 	                                        </label>
 	                                        <div class="controls">
-	                                            <input type="number" name="dname" id="dname"  />
-	                                            <span id="span1"></span>
+	                                            <input type="text" name="dname" id="dname"  />
+	                                             <span id="span1"></span>
 	                                        </div>
 	                                    </div>
 	                                    <div id="info3" class="control-group">
@@ -225,14 +226,20 @@
 				</div>	
 			</div>	
 
-            <div class="alert alert-error">
-                保存失败
-            </div>
-
-            <div class="alert alert-success">
-                保存成功
-            </div>
-
+            <c:choose>
+			<c:when test="${ n==1 }">
+				 <div class="alert alert-success">
+                	保存成功
+            	</div>
+			</c:when>
+			
+			<c:when test="${ n==0 }">
+				   <div class="alert alert-error">
+		            	    保存失败
+		           </div>
+			</c:when>
+		</c:choose> 
+	  
 			
 		</div>		
         <div class="row-fluid">&nbsp;</div>

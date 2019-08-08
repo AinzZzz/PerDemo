@@ -32,13 +32,15 @@ public class GetAllJobServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		JobInfoDao jobinfoDao = new JobInfoDaoImpl();
 		
 		try {
 			List<JobInfo> jobinfos = jobinfoDao.getAll();
+			
 			request.setAttribute("jobinfos", jobinfos);
 			
-			request.getRequestDispatcher("/viewjobinfo.jsp").forward(request, response);
+			request.getRequestDispatcher("/joblist.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

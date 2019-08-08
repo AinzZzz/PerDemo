@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<title>企业人事管理平台</title>
@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li class="btn btn-inverse">
-                    <a href="login.html">
+                    <a href="login.jsp">
                         <i class="icon icon-share-alt"></i>
                         <span class="text">注销</span>
                     </a>
@@ -52,7 +52,8 @@
                         <span>首页</span>
                     </a>
                 </li>
-                <li class="active">
+                
+                <li>
                     <a href="empinfo.jsp">
                         <i class="icon icon-tag"></i> 
                         <span>查看个人信息</span>
@@ -64,8 +65,8 @@
                         <span>修改登录密码</span>
                     </a>
                 </li>
-                
-                <li>
+               
+                <li class="active">
                     <a href="emplist.jsp">
                         <i class="icon icon-user"></i> 
                         <span>员工信息管理</span> 
@@ -94,10 +95,10 @@
 			</div>
 			<div id="breadcrumb">
 				<a href="main.jsp" class="tip-bottom">
-                	<i class="icon-home"></i>
-                    首页
+                	<i class="icon-home"></i>首页
                 </a>
-				<a href="#" class="current">查看个人信息</a>
+				<a href="emplist.jsp">员工列表</a>
+				<a href="#" class="current">查看员工</a>
 			</div>
         	<div class="container-fluid">
 				<div class="row-fluid">
@@ -109,79 +110,43 @@
 								</span>
 								<h5>基础信息</h5>
 							</div>
-                            <table width="100%">
-                            	<tr>
-                                	<td width="15%" align="right">员工编号:</td>
-                                    <td width="60%" align="left">
-                                    	&nbsp;&nbsp;
-                                    	1
-                                    </td>
-                                    <td width="200px" rowspan="5">
-                                    	<img src="img/head.jpg" width="200" height="160"></img>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                	<td align="right">员工姓名:</td>
-                                    <td align="left">
-                                    	&nbsp;&nbsp;
-                                		    史蒂夫·罗杰斯
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                	<td align="right">性别:</td>
-                                    <td align="left">
-                                    	&nbsp;&nbsp;
-                                    	男
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                	<td align="right">性别:</td>
-                                    <td align="left">
-                                    	&nbsp;&nbsp;
-                                    	男
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                	<td align="right">用工形式:</td>
-                                    <td align="left">
-                                    	&nbsp;&nbsp;
-                                    	正式员工
-                                    </td>
-                                    <td></td>
-                                </tr>   
-                                <tr>
-                                	<td align="right">联系电话:</td>
-                                    <td align="left">
-                                    	&nbsp;&nbsp;
-                                    	999
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                	<td align="right">email:</td>
-                                    <td align="left">
-                                    	&nbsp;&nbsp;
-                                    	999@163.com
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                	<td align="right">状态:</td>
-                                    <td align="left">
-                                    	&nbsp;&nbsp;
-                                    	在职
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                               
-                            </table>
+							<form id="eform" action="${pageContext.request.contextPath }/GetByIdEmpEmpServlet" class="form-horizontal" method="post" />
+	                          <table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>员工编号</th>
+											<th>员工姓名</th>
+											<th>性别</th>
+											<th>部门名称</th>
+											<th>岗位名称</th>
+											<th>岗位类型</th>
+											<th>状态</th>
+											<th>电话</th>
+											<th>email</th>
+										</tr>
+									</thead>
+									<tbody>								
+	                             		<tr>
+	                             		<td>${emp.empno }</td>	                             		
+	                             		<td>${emp.ename }</td>	                        		
+	                             		<td>${emp.gender }</td>	                             		
+	                             		<td>${emp.dname }</td>                             		
+	                             		<td>${emp.job }</td>	                             		
+	                             		<td>${emp.emply }</td>	                             		
+	                             		<td>${emp.status }</td>	                             		
+	                             		<td>${emp.tel }</td>	                             		
+	                             		<td>${emp.email }</td>
+	                             		</tr>	                            
+									</tbody>
+								</table>
+	                          
+	                               
+	                                    
+	                                   <div class="form-actions">
+	                                        <input type="submit" value="提交" class="btn btn-primary" />
+	                                        <input type="reset" value="重置" class="btn btn-primary" />
+	                                    </div>
+	                                </form>
 						</div>			
 					</div>
 				</div>	
@@ -253,7 +218,8 @@
 								<td></td>
 							</tr>
 						</tbody>
-					</table>							
+					</table>	
+					</form>						
 				</div>
 			</div>
 		</div>
@@ -265,4 +231,3 @@
        </div>
 	</body>
 </html>
-

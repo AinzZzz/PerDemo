@@ -41,25 +41,25 @@ public class JobInfoDaoImpl implements JobInfoDao {
 
 	@Override
 	public int delete(int jobno) throws Exception {
-		String sql="delect dept where jobno =?";
+		String sql="delete from job_info where jobno =?";
 		int n = util.executeUpdate(sql, jobno);
 		return n;
 		
 	}
 
 	@Override
-	public JobInfo getByName(String job) throws Exception {
-		String sql="select * from job_info where  job= ? ";
+	public JobInfo getById(Integer jobno) throws Exception {
+		String sql="select * from job_info where  jobno= ? ";
 		Connection connection = util.getConnection();
-		ResultSet rs = util.executeQuery(connection, sql, job);
+		ResultSet rs = util.executeQuery(connection, sql, jobno);
 		JobInfo jobinfo = null;
 		
-		Integer jobno;		
+		String job;	
 		String jtype;
 		String weave;
 		
 		while(rs.next()) {
-			jobno = rs.getInt("jobno");
+			job = rs.getString("job");
 			jtype = rs.getString("jtype");
 			weave = rs.getString("weave");
 			

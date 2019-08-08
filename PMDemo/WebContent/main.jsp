@@ -65,7 +65,7 @@
                 </li>
                 
                 <li>
-                    <a href="emplist.jsp">
+                    <a href="GetAllEmpsServlet">
                         <i class="icon icon-user"></i> 
                         <span>员工信息管理</span> 
                     </a>

@@ -1,30 +1,26 @@
 package com.neu.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.neu.dao.EmpDao;
-import com.neu.dao.EmpDaoImpl;
-import com.neu.entity.Emp;
+import com.neu.dao.JobInfoDao;
+import com.neu.dao.JobInfoDaoImpl;
 
 /**
- * Servlet implementation class GetAllServlet
+ * Servlet implementation class DelJobServlet
  */
-@WebServlet("/GetAllEmpsServlet")
-public class GetAllEmpsServlet extends HttpServlet {
+@WebServlet("/DelJobServlet")
+public class DelJobServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetAllEmpsServlet() {
+    public DelJobServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +29,15 @@ public class GetAllEmpsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Integer jobno =Integer.parseInt(request.getParameter("jobno")) ;
 		
+		JobInfoDao jobinfoDao = new JobInfoDaoImpl();
 		
-		EmpDao empDao = new EmpDaoImpl();
-		
-		
-		try {
+		try {			
 			
-				List<Emp> emps = empDao.getAll();
-				request.setAttribute("emps", emps);
-				
-				request.getRequestDispatcher("/emplist.jsp").forward(request, response);
-			
-			
-			
-			
+			 jobinfoDao.delete(jobno);
+			 
+			 request.getRequestDispatcher("joblist.jsp").forward(request, response);;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

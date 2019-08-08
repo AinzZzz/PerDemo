@@ -106,51 +106,17 @@
 			<input type="hidden" name="pagenum" id="pagenum"/>
 			<div class="container-fluid">
 				<div class="row-fluid">
-					<div class="control-group">
-					<span class="span3">
-							员工编号：<input id="empno" name="empno" type="text" style="width:65%"/>
-						</span>
-						<span class="span3">
-							员工姓名：<input id="ename" name="ename" type="text" style="width:65%"/>
-						</span>
-						<span class="span3">
-							性别：<select id="gender" name="gender" style="width:70%">
-									<option value="-1">=请选择=</option>
-									<option value="1">男</option>
-									<option value="2">女</option>
-								</select>
-						</span>
-						<span class="span3">
-							用工形式：<select id="emply" name="emply" style="width:70%">
-									<option value="-1">=请选择=</option>
-									<option value="1">正式员工</option>
-                                    <option value="2">临时员工</option>
-								</select>
-						</span>
-						<span class="span3">
-							部门名称：<input id="job" name="job" type="text" style="width:65%"/>
-						</span>
-						
-					</div>
+					
 					<div class="control-group">
 
 						  
-						<span class="span3">
-							状态：<select id="status" name="status" style="width:70%">
-									<option value="-1">=请选择=</option>
-									<option value="1">在职</option>
-                                    <option value="2">离职</option>
-								</select>
-						</span>
+						
                         <span class="span3">
 							<button class="btn btn-info" onclick="submitForm(1);">
 								<i class="icon-white icon-search"></i>
-								查询
+								查询所有
 							</button>
-							<button type="button" class="btn btn-info" onclick="resetForm();">
-								<i class="icon-white icon-repeat"></i>
-								重置
-							</button>
+							
 						</span>
 					</div>
 				</div>
@@ -185,28 +151,33 @@
 									</tr>
 								</thead>
 								<tbody>
-                                    <tr>
-                                        <td>1001</td>
-                                        <td>史蒂夫·罗杰斯</td>
-                                        <td>男</td>
-                                        <td>正式员工</td>
-                                        <td>神盾局</td>
-                                        <td>在职</td>
-                                        <td>
-                                            <button class="btn btn-info" onclick="allmessage()">
+										<c:forEach items="${emps }" var="emp" varStatus="status">
+	                             		<tr>
+	                             		<td>${emp.empno }</td>	                             		
+	                             		<td>${emp.ename }</td>	                             		
+	                             		<td>${emp.gender }</td>	                             		
+	                             		<td>${emp.dname }</td>                             		
+	                             		<td>${emp.job }</td>	                             		
+	                             		<td>${emp.emply }</td>	                             		
+	                             		<td>${emp.status }</td>	                             		
+	                             		<td>${emp.tel }</td>	                             		
+	                             		<td>${emp.email }</td>
+	                             		
+	                             		 <td>
+                                            <button class="btn btn-info" onclick="allmessage${status.index}()">
                                                 <i class="icon-white icon-eye-open"></i>
                                                 查看
                                             </button>
-                                            <button class="btn btn-warning" onclick="gotomodify()">
+                                            <button class="btn btn-warning" onclick="gotomodify${status.index}()">
                                                 <i class="icon-white icon-refresh"></i>
                                                 修改
                                             </button>
                                             
                                             <script type="text/javascript">
-											  function allmessage(){
-                                                   location.href="${pageContext.request.contextPath }/GetAllEmpsServlet";
+											  function allmessage${status.index}(){
+                                                   location.href="${pageContext.request.contextPath }/GetByIdEmpEmpServlet?empno=${emp.empno }";
                                                }
-                                              function gotomodify(){
+                                              function gotomodify${status.index}(){
                                                   location.href="modifyEmp.jsp";
                                               }
 											  function gotoChange(){
@@ -225,53 +196,17 @@
                                               
                                             </script>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1002</td>
-                                        <td>李四</td>
-                                        <td>男</td>
-                                        <td>软件工程师</td>
-                                        <td>研发二部</td>
-                                        <td>离职</td>
-                                        <td>
-                                            <button class="btn btn-info" onclick="allmessage()">
-                                                <i class="icon-white icon-eye-open"></i>
-                                                查看
-                                            </button>
-                                            <button class="btn btn-warning" onclick="gotomodify()">
-                                                <i class="icon-white icon-refresh"></i>
-                                                修改
-                                            </button>
-                                            <button class="btn btn-info" onclick="lizhi()">
-                                                <i class="icon-white icon-plus"></i>
-                                                入职
-                                            </button>
-                                              
-                                            <button class="btn btn-success" onclick="gotoChange()">
-                                                <i class="icon-white icon-share"></i>
-                                                调转
-                                            </button> 
-                                        </td>
-                                    </tr>
-								</tbody>
+	                             		</tr>
+	                             </c:forEach> 
+	                             
+									</tbody>
+								
 							</table>							
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
-				<div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers">
-			<a tabindex="0" href="javascript:"+method+"(1)" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
-			<a tabindex="0" href="#" class="previous fg-button ui-button ui-state-default">上一页</a>
-            <a tabindex="0" href="#" class="fg-button ui-button ui-state-default">1</a>
-            <a tabindex="0" class="fg-button ui-button ui-state-default ui-state-disabled">2
-            </a>
-            <a tabindex="0" href="#" class="fg-button ui-button ui-state-default">3</a>
-            <a tabindex="0" href="#" class="previous fg-button ui-button ui-state-default">下一页</a>
-			<a tabindex="0" href="#" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default">尾页</a>
 			
-			</div>
-			</div>
 		</div>		
         <div class="row-fluid">&nbsp;</div>
         <div class="row-fluid">
